@@ -93,12 +93,13 @@ male_barcodes   <- maf_object@clinical.data$Tumor_Sample_Barcode[male_mask]
 female_maf <- subsetMaf(maf = maf_object, tsb = female_barcodes)
 male_maf <- subsetMaf(maf = maf_object, tsb = male_barcodes)
 
-coOncoplot(m1 = female_maf,
-           m2 = male_maf,
-           m1Name = "Female Patients",
-           m2Name = "Male Patients")
+oncoplot(maf = female_maf, top = 15, titleText = "Top 15 — FEMALE")
+oncoplot(maf = male_maf,   top = 15, titleText = "Top 15 — MALE")
+
 ```
-Discrepancy can't be compared due to "Error in plot.new() : figure margins too large".
+In the two-group oncoplots, TP53 shows the largest discrepancy: ~35% mutated in females but not in the male top list (≈0%), while PIK3CA is common in both (≈34% vs ≈27%) and BRCA2 appears only among male top genes (~18%).
+TP53 encodes the p53 tumor-suppressor, which safeguards the genome by coordinating DNA-damage response, cell-cycle arrest, and apoptosis; loss-of-function promotes tumor progression.
+By researching the female–male gap likely reflects biology and cohort makeup: male breast cancers are predominantly ER-positive/luminal subtypes that carry fewer TP53 mutations, whereas the female cohort includes more ER-negative/basal-like cases where TP53 mutations are frequent; additionally, the male sample size is very small, so absence of TP53 may be partly due to limited power.
 
 *3*
 Create a contingency table with your variable and chosen gene. Run a Fisher’s Exact Test between presence of mutations for that gene and your clinical variable. Create and save a mosaic plot. 
